@@ -8,6 +8,7 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
+    <p> Sample Data for login(username=MeherNiger, password=abc)</p>
     <div class="container mt-5">
         <h2 class="text-center">Admin Login</h2>
 

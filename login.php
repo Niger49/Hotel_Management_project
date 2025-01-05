@@ -8,7 +8,6 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <p> Sample Data for login(username=MeherNiger, password=abc)</p>
     <div class="container mt-5">
         <h2 class="text-center">Admin Login</h2>
 
@@ -16,39 +15,53 @@
         session_start();
         include 'dbconnect.php';
 
-        $msg="";
-        if(isset($_POST['submit'])){
-            $username=$_POST['username'];
-            $password=$_POST['password'];
-            
-            $sql="select * from adminusers where username='$username' and password='$password'";
-            $res=mysqli_query($con,$sql);
-            if(mysqli_num_rows($res)>0){
-                $row=mysqli_fetch_assoc($res);
-                $_SESSION['IS_LOGIN']='yes';
-                $_SESSION['ADMIN_USER']=$row['username'];
-                header('Location: dashboard.php');
-            }else{
-                $msg="Please enter valid login details";
-            }
-        }
+        $msg = "";
+        if (isset($_POST['submit'])) {
+            $username = trim($_POST['username']);
+            $password = trim($_POST['password']);
 
+            // Use prepared statement to fetch user details
+            $stmt = $con->prepare("SELECT * FROM adminusers WHERE username = ?");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+
+                $t = $row['password'];
+
+               // echo "$password, $t";
+
+                // Verify the password hash
+                if (password_verify($password, $row['password'])) {
+                    $_SESSION['IS_LOGIN'] = 'yes';
+                    $_SESSION['ADMIN_USER'] = $row['username'];
+                    header('Location: dashboard.php');
+                    exit();
+                } else {
+                    $msg = "Invalid password.";
+                }
+            } else {
+                header('Location: signup.php');
+                //$msg = "Invalid username.";
+            }
+            $stmt->close();
+        }
         ?>
 
         <form method="POST" action="" class="mt-4">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username" required>
+                <input type="text" class="form-control" name="username" id="username" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
+                <input type="password" class="form-control" name="password" id="password" required>
             </div>
             <button type="submit" class="btn btn-primary w-100" name="submit">Login</button>
         </form>
         <div class="text-danger text-center mt-3"><?php echo htmlspecialchars($msg); ?></div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

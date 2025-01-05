@@ -31,6 +31,7 @@ if (!isset($_SESSION['IS_LOGIN'])) {
                     <li class="nav-item"><a class="nav-link" href="addRoom.php">Add Room</a></li>
                     <li class="nav-item"><a class="nav-link" href="updateRoom.php">Update Room</a></li>
                     <li class="nav-item"><a class="nav-link" href="deleteRoom.php">Delete Room</a></li>
+                    
                     <li class="nav-item">
                         <form action="logout.php" method="POST">
                             <button type="submit" name="logout" class="logout-btn">Logout</button>

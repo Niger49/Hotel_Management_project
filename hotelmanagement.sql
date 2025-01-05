@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2025 at 07:36 PM
+-- Generation Time: Jan 05, 2025 at 01:47 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `adminusers` (
   `id` int(11) NOT NULL,
-  `username` varchar(30) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `username` varchar(250) NOT NULL,
+  `password` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -38,9 +38,12 @@ CREATE TABLE `adminusers` (
 --
 
 INSERT INTO `adminusers` (`id`, `username`, `password`) VALUES
-(7, 'MeherNiger', 'abc'),
-(8, 'Meher', 'abc'),
-(9, 'Niger', '123');
+(10, 'Ania', '$2y$10$iCcD/TmVgp3tOTmet8kSauw64Ijf4hVzOO2EVSe61/6'),
+(11, 'test', '$2y$10$W1d48mYZBDRsbV25Ukb5TO/Gm3TxpJegLRQgw3duG0u'),
+(14, 'testagain', '$2y$10$.sLL/Ati7ptirQ0IT0.azOtvVBTriCk9P1EXJXgEDkI'),
+(15, 't', '$2y$10$5AW7TQaNS8E3..1GqfLl7.MyLUwJfPHcSxf71gWHGjNcwnOMBp6ua'),
+(16, 'Niger', '$2y$10$ajnF15zFWeSSrKlBSm2yX.6s/X4qEkWbEn8lws3v1voKMRF70fblS'),
+(17, 'Niger', '$2y$10$VtopN.uHsgUFDH3m8X1Pfefh1t/Wws6HJJk.L4CSAfvtUBpzYLQrO');
 
 -- --------------------------------------------------------
 
@@ -88,7 +91,7 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `adminusers`
 --
 ALTER TABLE `adminusers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `rooms`
